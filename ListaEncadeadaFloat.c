@@ -39,4 +39,16 @@ void inserir_inicio(ListaFloat *L1, float val){
     }
 }
 
-
+void inserir_fim(ListaFloat *L1, float val){
+    BlocoFloat *novo_bloco = cria_bloco(val);
+    if(L1->inicio == NULL){
+        L1->inicio = novo_bloco;
+    }else{
+        BlocoFloat *aux = L1->inicio;
+        while(aux->proximo != NULL){
+            aux = aux->proximo;
+        }
+        aux->proximo = novo_bloco;
+        novo_bloco->anterior = aux;
+    }
+}
