@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include "ListaEncadeadaFloat.h"
 
 
 typedef struct _blocofloat{
@@ -11,12 +12,18 @@ typedef struct _blocofloat{
 
 typedef struct _listafloat{
     BlocoFloat *inicio;
-    BlocoFloat *fim;
 }ListaFloat;
 
 ListaFloat *cria_lista(void){
-    ListaFloat *L1 = (ListaFloat*)calloc(1,sizeof(ListaFloat));
+    ListaFloat *L1 = (ListaFloat*)calloc(1, sizeof(ListaFloat));
     L1->inicio = NULL;
-    L1->fim = NULL;
     return L1;
+}
+
+BlocoFloat *cria_bloco(float val){
+    BlocoFloat *novo_bloco = (BlocoFloat*)calloc(1, sizeof(BlocoFloat));
+    novo_bloco->anterior = NULL;
+    novo_bloco->proximo = NULL;
+    novo_bloco->valor = val;
+    return novo_bloco;
 }
