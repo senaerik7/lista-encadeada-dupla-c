@@ -55,6 +55,22 @@ void inserir_fim(ListaFloat *L1, float val){
     }
 }
 
+void remover_inicio(ListaFloat *L1){
+    if(L1->inicio == NULL){
+        puts("\nA LISTA ESTÁ VAZIA!");
+        return;
+    }
+    if(L1->inicio->proximo == NULL){
+        free(L1->inicio);
+        L1->inicio = NULL;
+    }else{
+        BlocoFloat *aux = L1->inicio;
+        L1->inicio = L1->inicio->proximo;
+        L1->inicio->anterior = NULL;
+        free(aux);
+    }
+}
+
 void imprimir_lista(const ListaFloat *L1, int op){
     if(L1->inicio == NULL){
         puts("\nA LISTA ESTÁ VAZIA!");
