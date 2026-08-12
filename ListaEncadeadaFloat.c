@@ -89,6 +89,36 @@ void remover_fim(ListaFloat *L1){
     }
 }
 
+void remover_ocorrencias(ListaFloat *L1, float val){
+    if(L1->inicio == NULL){
+       puts("\nA LISTA ESTÁ VAZIA!");
+       return;
+    }
+    BlocoFloat *atual = L1->inicio;
+    BlocoFloat *aux = NULL;
+    while(atual != NULL){
+        if(fabs(atual->valor - val) < EPSILON){
+            aux = atual;
+            if(L1->inicio == atual){
+                L1->inicio = atual->proximo;
+                if(L1->inicio != NULL){
+                    L1->inicio->anterior = NULL;
+                }
+            }else{
+                atual->anterior->proximo = atual->proximo;
+                if(atual->proximo != NULL){
+                    atual->proximo->anterior = atual->anterior;
+                }
+            }
+            atual = atual->proximo;
+            free(aux);
+            aux = NULL;
+        }else{
+            atual = atual->proximo;
+        }
+    }
+}
+
 void imprimir_lista(const ListaFloat *L1, int op){
     if(L1->inicio == NULL){
         puts("\nA LISTA ESTÁ VAZIA!");

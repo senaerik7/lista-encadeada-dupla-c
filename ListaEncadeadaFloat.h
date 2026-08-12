@@ -14,7 +14,7 @@ void inserir_fim(ListaFloat *L1, float val);
 void imprimir_lista(const ListaFloat *L1, int op);
 void remover_inicio(ListaFloat *L1);
 void remover_fim(ListaFloat *L1);
-//void remover_ocorrencias(ListaFloat *L1, float val);
+void remover_ocorrencias(ListaFloat *L1, float val);
 int busca_index(const ListaFloat *L1, float val);
 char media_val(const ListaFloat *L1, float *media);
 
