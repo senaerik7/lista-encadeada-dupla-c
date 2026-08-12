@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <math.h>
 #include "ListaEncadeadaFloat.h"
 
+#define EPSILON 0.0001
 
 typedef struct _blocofloat{
     float valor;
@@ -92,4 +94,20 @@ void imprimir_lista(const ListaFloat *L1, int op){
         puts("\nOPÇÃO INVÁLIDA!");
         return;
     }
+}
+
+int busca_index(const ListaFloat *L1, float val){
+    if(L1->inicio == NULL){
+        return -1;
+    }
+    BlocoFloat *aux = L1->inicio;
+    int contador = 0;
+    while(aux != NULL){
+        if(fabs(aux->valor - val) < EPSILON){
+            return contador;
+        }
+        contador++;
+        aux = aux->proximo;
+    }
+    return -1;
 }

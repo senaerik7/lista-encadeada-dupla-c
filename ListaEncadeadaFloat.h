@@ -1,5 +1,7 @@
 #ifndef LISTAENCADEADAFLOAT_H_INCLUDED
 #define LISTAENCADEADAFLOAT_H_INCLUDED
+#include <math.h>
+#define EPSILON 0.0001
 
 typedef struct _listafloat ListaFloat;
 typedef struct _blocofloat BlocoFloat;
@@ -10,5 +12,6 @@ BlocoFloat *cria_bloco(float val);
 void inserir_inicio(ListaFloat *L1, float val);
 void inserir_fim(ListaFloat *L1, float val);
 void imprimir_lista(const ListaFloat *L1, int op);
+int busca_index(const ListaFloat *L1, float val);
 
 #endif
