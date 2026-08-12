@@ -4,4 +4,6 @@
 typedef struct _listafloat ListaFloat;
 typedef struct _blocofloat BlocoFloat;
 
+ListaFloat *cria_lista(void);
+
 #endif
