@@ -27,3 +27,16 @@ BlocoFloat *cria_bloco(float val){
     novo_bloco->valor = val;
     return novo_bloco;
 }
+
+void inserir_inicio(ListaFloat *L1, float val){
+    BlocoFloat *novo_bloco = cria_bloco(val);
+    if(L1->inicio == NULL){
+        L1->inicio = novo_bloco;
+    }else{
+        novo_bloco->proximo = L1->inicio;
+        L1->inicio->anterior = novo_bloco;
+        L1->inicio = novo_bloco;
+    }
+}
+
+
