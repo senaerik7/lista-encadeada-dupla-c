@@ -111,3 +111,19 @@ int busca_index(const ListaFloat *L1, float val){
     }
     return -1;
 }
+
+char media_val(const ListaFloat *L1, float *media){
+    if(L1->inicio == NULL){
+        return 'n';
+    }
+    BlocoFloat *aux = L1->inicio;
+    float soma = 0.0;
+    int contador = 0;
+    while(aux != NULL){
+        soma = soma + aux->valor;
+        contador++;
+        aux = aux->proximo;
+    }
+    *media = soma/contador;
+    return 's';
+}

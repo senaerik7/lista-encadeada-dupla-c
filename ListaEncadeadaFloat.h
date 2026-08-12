@@ -13,5 +13,6 @@ void inserir_inicio(ListaFloat *L1, float val);
 void inserir_fim(ListaFloat *L1, float val);
 void imprimir_lista(const ListaFloat *L1, int op);
 int busca_index(const ListaFloat *L1, float val);
+char media_val(const ListaFloat *L1, float *media);
 
 #endif
