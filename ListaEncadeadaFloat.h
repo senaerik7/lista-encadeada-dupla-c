@@ -9,5 +9,6 @@ BlocoFloat *cria_bloco(float val);
 
 void inserir_inicio(ListaFloat *L1, float val);
 void inserir_fim(ListaFloat *L1, float val);
+void imprimir_lista(const ListaFloat *L1, int op);
 
 #endif
