@@ -19,5 +19,6 @@ int inverter_lista(ListaFloat *L1);
 void ordenar_lista_valores(ListaFloat *L1);
 int busca_index(const ListaFloat *L1, float val);
 char media_val(const ListaFloat *L1, float *media);
+void destrutora(ListaFloat **L1);
 
 #endif

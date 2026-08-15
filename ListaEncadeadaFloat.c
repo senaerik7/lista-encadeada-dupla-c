@@ -233,3 +233,25 @@ char media_val(const ListaFloat *L1, float *media){
     *media = soma/contador;
     return 's';
 }
+
+void destrutora(ListaFloat **L1){
+    if(L1 == NULL || *L1 == NULL){
+        return;
+    }
+    if((*L1)->inicio == NULL){
+        puts("\nA LISTA ESTÁ VAZIA!");
+        free(*L1);
+        *L1 = NULL;
+        return;
+    }
+    BlocoFloat *atual = (*L1)->inicio;
+    BlocoFloat *aux = NULL;
+    while(atual != NULL){
+        aux = atual->proximo;
+        free(atual);
+        atual = aux;
+    }
+    free(*L1);
+    *L1 = NULL;
+    puts("\nA LISTA FOI DESALOCADA!");
+}
