@@ -57,7 +57,7 @@ void inserir_fim(ListaFloat *L1, float val){
 
 void remover_inicio(ListaFloat *L1){
     if(L1->inicio == NULL){
-        puts("\nA LISTA ESTÁ VAZIA!");
+        puts("\nA LISTA ESTÁ VAZIA!\n");
         return;
     }
     if(L1->inicio->proximo == NULL){
@@ -73,7 +73,7 @@ void remover_inicio(ListaFloat *L1){
 
 void remover_fim(ListaFloat *L1){
     if(L1->inicio == NULL){
-        puts("\nA LISTA ESTÁ VAZIA!");
+        puts("\nA LISTA ESTÁ VAZIA!\n");
         return;
     }
     if(L1->inicio->proximo == NULL){
@@ -92,7 +92,7 @@ void remover_fim(ListaFloat *L1){
 
 void ordenar_lista_valores(ListaFloat *L1){
     if(L1->inicio == NULL || L1->inicio->proximo == NULL){
-        puts("\nA LISTA JÁ ESTÁ ORDENADA!");
+        puts("\nA LISTA JÁ ESTÁ ORDENADA!\n");
         return;
     }
     BlocoFloat *atual = L1->inicio;
@@ -115,14 +115,16 @@ void ordenar_lista_valores(ListaFloat *L1){
 
 void remover_ocorrencias(ListaFloat *L1, float val){
     if(L1->inicio == NULL){
-       puts("\nA LISTA ESTÁ VAZIA!");
+       puts("\nA LISTA ESTÁ VAZIA!\n");
        return;
     }
     BlocoFloat *atual = L1->inicio;
     BlocoFloat *aux = NULL;
+    int removido = 0;
 
     while(atual != NULL){
         if(fabs(atual->valor - val) < EPSILON){
+            removido = 1;
             aux = atual;
             atual = atual->proximo;
             if(L1->inicio == aux){
@@ -140,6 +142,9 @@ void remover_ocorrencias(ListaFloat *L1, float val){
         }else{
             atual = atual->proximo;
         }
+    }
+    if(removido == 0){
+        puts("O NÚMERO NÃO ESTÁ NA LISTA!\n");
     }
 }
 
@@ -163,7 +168,7 @@ int inverter_lista(ListaFloat *L1){
 
 void imprimir_lista(const ListaFloat *L1, int op){
     if(L1->inicio == NULL){
-        puts("\nA LISTA ESTÁ VAZIA!");
+        puts("\nA LISTA ESTÁ VAZIA!\n");
         return;
     }
     BlocoFloat *aux = L1->inicio;
@@ -197,7 +202,7 @@ void imprimir_lista(const ListaFloat *L1, int op){
             fim = fim->anterior;
         }
     }else{
-        puts("\nOPÇÃO INVÁLIDA!");
+        puts("\nOPÇÃO INVÁLIDA!\n");
         return;
     }
 }
@@ -239,7 +244,7 @@ void destrutora(ListaFloat **L1){
         return;
     }
     if((*L1)->inicio == NULL){
-        puts("\nA LISTA ESTÁ VAZIA!");
+        puts("\nA LISTA ESTÁ VAZIA!\n");
         free(*L1);
         *L1 = NULL;
         return;
