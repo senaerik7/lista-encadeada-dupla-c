@@ -89,38 +89,26 @@ void remover_fim(ListaFloat *L1){
     }
 }
 
-void ordenar_lista(ListaFloat *L1){
+
+void ordenar_lista_valores(ListaFloat *L1){
     if(L1->inicio == NULL || L1->inicio->proximo == NULL){
-        puts("\nA LISTA JÁ ESTÁ ORNDENADA");
+        puts("\nA LISTA JÁ ESTÁ ORDENADA!");
         return;
     }
     BlocoFloat *atual = L1->inicio;
-    BlocoFloat *aux1 = NULL;
-    BlocoFloat *aux2 = NULL;
-    BlocoFloat *aux3 = NULL;
-    int trocou = 0;
+    float aux = 0.0;
+    int trocou  = 0;
     do{
         atual = L1->inicio;
         trocou = 0;
         while(atual->proximo != NULL){
             if(atual->valor>atual->proximo->valor){
                 trocou = 1;
-                aux1 = atual->proximo;
-                aux2 = aux1->proximo;
-                aux1->anterior = atual->anterior;
-                aux1->proximo = atual;
-                aux3 = atual->anterior;
-                atual->anterior = aux1;
-                atual->proximo = aux2;
-                if(aux3 != NULL){
-                    aux3->proximo = aux1;
-                }else{
-                    L1->inicio = aux1;
-                }
-                if(aux2 != NULL){
-                    aux2->anterior = atual;
-                }
+                aux = atual->proximo->valor;
+                atual->proximo->valor = atual->valor;
+                atual->valor = aux;
             }
+            atual = atual->proximo;
         }
     }while(trocou != 0);
 }
@@ -132,30 +120,46 @@ void remover_ocorrencias(ListaFloat *L1, float val){
     }
     BlocoFloat *atual = L1->inicio;
     BlocoFloat *aux = NULL;
+
     while(atual != NULL){
         if(fabs(atual->valor - val) < EPSILON){
             aux = atual;
-            if(L1->inicio == atual){
-                L1->inicio = atual->proximo;
+            atual = atual->proximo;
+            if(L1->inicio == aux){
+                L1->inicio = aux->proximo;
                 if(L1->inicio != NULL){
                     L1->inicio->anterior = NULL;
                 }
             }else{
-                atual->anterior->proximo = atual->proximo;
-                if(atual->proximo != NULL){
-                    atual->proximo->anterior = atual->anterior;
+                aux->anterior->proximo = aux->proximo;
+                if(aux->proximo != NULL){
+                    aux->proximo->anterior = aux->anterior;
                 }
             }
-            atual = atual->proximo;
             free(aux);
-            aux = NULL;
         }else{
             atual = atual->proximo;
         }
     }
 }
 
-
+int inverter_lista(ListaFloat *L1){
+    if(L1->inicio == NULL){
+        return 0;
+    }
+    BlocoFloat *atual = L1->inicio;
+    BlocoFloat *aux = NULL;
+    while(atual != NULL){
+        aux = atual->anterior;
+        atual->anterior = atual->proximo;
+        atual->proximo = aux;
+        atual = atual->anterior;
+    }
+    if(aux != NULL){
+        L1->inicio = aux->anterior;
+    }
+    return 1;
+}
 
 void imprimir_lista(const ListaFloat *L1, int op){
     if(L1->inicio == NULL){
