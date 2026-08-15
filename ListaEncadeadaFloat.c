@@ -167,43 +167,47 @@ int inverter_lista(ListaFloat *L1){
 }
 
 void imprimir_lista(const ListaFloat *L1, int op){
-    if(L1->inicio == NULL){
-        puts("\nA LISTA ESTÁ VAZIA!\n");
+    if(L1 == NULL || L1->inicio == NULL){
+        puts("A LISTA ESTÁ VAZIA!\n");
         return;
     }
-    BlocoFloat *aux = L1->inicio;
-    BlocoFloat *fim = NULL;
-    while(aux->proximo != NULL){
-        aux = aux->proximo;
-    }
-    fim = aux;
-    aux = L1->inicio;
     if(op == 1){
-        printf("[Início] -> ");
+        BlocoFloat *aux = L1->inicio;
+        printf("\n[Início] -> ");
         while(aux != NULL){
             if(aux == L1->inicio && aux->proximo == NULL){
-                printf("[NULL|%.1f|NULL].", aux->valor);
-            }else if(aux == L1->inicio){
+                printf("[NULL|%.1f|NULL]", aux->valor);
+            } else if(aux == L1->inicio){
                 printf("[NULL|%.1f] -> ", aux->valor);
-            }else if(aux->proximo == NULL){
-                printf("[%.1f|NULL].", aux->valor);
-            }else{
+            } else if(aux->proximo == NULL){
+                printf("[%.1f|NULL]", aux->valor);
+            } else {
                 printf("[|%.1f|] <-> ", aux->valor);
-        }
+            }
             aux = aux->proximo;
         }
-    }else if(op == 2){
+        printf("\n\n");
+    } else if(op == 2){
+        BlocoFloat *fim = L1->inicio;
+        while(fim->proximo != NULL){
+            fim = fim->proximo;
+        }
+        printf("\n[Fim] -> ");
         while(fim != NULL){
-            if(fim->anterior == NULL){
+            if(fim == L1->inicio && fim->anterior == NULL){
+                printf("[NULL|%.1f|NULL]", fim->valor);
+            } else if(fim->proximo == NULL){
+                printf("[%.1f|NULL] -> ", fim->valor);
+            } else if(fim->anterior == NULL){
                 printf("[NULL|%.1f]", fim->valor);
-            }else{
+            } else {
                 printf("[|%.1f|] <-> ", fim->valor);
             }
             fim = fim->anterior;
         }
-    }else{
-        puts("\nOPÇÃO INVÁLIDA!\n");
-        return;
+        printf(" <- [Início]\n\n");
+    } else {
+        puts("\nOPÇÃO INVÁLIDA!\n\n");
     }
 }
 
@@ -244,7 +248,7 @@ void destrutora(ListaFloat **L1){
         return;
     }
     if((*L1)->inicio == NULL){
-        puts("\nA LISTA ESTÁ VAZIA!\n");
+        puts("\nA LISTA FOI DESALOCADA!");
         free(*L1);
         *L1 = NULL;
         return;
