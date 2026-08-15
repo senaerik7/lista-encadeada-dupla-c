@@ -89,6 +89,42 @@ void remover_fim(ListaFloat *L1){
     }
 }
 
+void ordenar_lista(ListaFloat *L1){
+    if(L1->inicio == NULL || L1->inicio->proximo == NULL){
+        puts("\nA LISTA JÁ ESTÁ ORNDENADA");
+        return;
+    }
+    BlocoFloat *atual = L1->inicio;
+    BlocoFloat *aux1 = NULL;
+    BlocoFloat *aux2 = NULL;
+    BlocoFloat *aux3 = NULL;
+    int trocou = 0;
+    do{
+        atual = L1->inicio;
+        trocou = 0;
+        while(atual->proximo != NULL){
+            if(atual->valor>atual->proximo->valor){
+                trocou = 1;
+                aux1 = atual->proximo;
+                aux2 = aux1->proximo;
+                aux1->anterior = atual->anterior;
+                aux1->proximo = atual;
+                aux3 = atual->anterior;
+                atual->anterior = aux1;
+                atual->proximo = aux2;
+                if(aux3 != NULL){
+                    aux3->proximo = aux1;
+                }else{
+                    L1->inicio = aux1;
+                }
+                if(aux2 != NULL){
+                    aux2->anterior = atual;
+                }
+            }
+        }
+    }while(trocou != 0);
+}
+
 void remover_ocorrencias(ListaFloat *L1, float val){
     if(L1->inicio == NULL){
        puts("\nA LISTA ESTÁ VAZIA!");
@@ -118,6 +154,8 @@ void remover_ocorrencias(ListaFloat *L1, float val){
         }
     }
 }
+
+
 
 void imprimir_lista(const ListaFloat *L1, int op){
     if(L1->inicio == NULL){
